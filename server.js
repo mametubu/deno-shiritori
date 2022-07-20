@@ -26,15 +26,15 @@ serve(async (req) => {
 
     const nextWord = requestJson.nextWord;
 
-    if (
-
-      nextWord.length > 0 &&
-
-      previousWord.charAt(previousWord.length - 1) !== nextWord.charAt(0)
-
-    ) {
+    if (nextWord.length > 0 && previousWord.charAt(previousWord.length - 1) !== nextWord.charAt(0)) {
 
       return new Response("前の単語に続いていません。", { status: 400 });
+
+    }
+
+    if(nextWord.length > 0 && previousWord.charAt(previousWord.length - 1)){
+
+      return new Response("単語の最後に「ん」がついてはいけません。ゲームをやり直します。",location.reload());
 
     }
 
