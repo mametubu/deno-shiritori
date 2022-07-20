@@ -6,7 +6,7 @@ const StartWord = [`りんご`,`ごりら`,`すし`,`らっぱ`,`ぱり`,`にく
 
 let previousWord = StartWord[Math.floor(Math.random() * StartWord.length)];
 
-let keepWord = [];
+let keepWord = Array(100000);
 
 console.log("Listening on http://localhost:8000");
 
@@ -20,13 +20,15 @@ serve(async (req) => {
 
   }
 
-  keepWord.push(previousWord);
+  keepWord.unshift(previousWord);
 
   if (req.method === "POST" && pathname === "/shiritori") {
 
     const requestJson = await req.json();
 
     const nextWord = requestJson.nextWord;
+
+    console.log(keepWord);
 
     keepWord.pop(previousWord);
 
@@ -36,7 +38,9 @@ serve(async (req) => {
 
     }
 
-    if(nextWord.lenght > 0 && keepWord.includes(nextWord)){
+    
+
+    if(nextWord.lenght > 0 && keepWord.test(nextWord)){
 
       return new Response("同じ単語は入力できません。",{ status: 400 });
 
