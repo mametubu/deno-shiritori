@@ -4,6 +4,8 @@ import { serveDir } from "https://deno.land/std@0.138.0/http/file_server.ts";
 
 let previousWord = "しりとり";
 
+let keepWord = [];
+
 console.log("Listening on http://localhost:8000");
 
 serve(async (req) => {
@@ -15,6 +17,8 @@ serve(async (req) => {
     return new Response(previousWord);
 
   }
+
+  keepWord.push(previousWord);
 
   if (req.method === "POST" && pathname === "/shiritori") {
 
