@@ -32,7 +32,7 @@ serve(async (req) => {
 
     }
 
-    if(nextWord.length > 0 && previousWord.charAt(previousWord.length - 1) === `ん`){
+    if(nextWord.length > 0 && previousWord.charAt(previousWord.length - 1) == `ん`){
 
       return new Response("単語の最後に「ん」がついてはいけません。ゲームをやり直します。");
 
