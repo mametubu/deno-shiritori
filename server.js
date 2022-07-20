@@ -4,7 +4,7 @@ import { serveDir } from "https://deno.land/std@0.138.0/http/file_server.ts";
 
 const StartWord = [`りんご`,`ごりら`,`すし`,`らっぱ`,`ぱり`,`にく`,`めがね`,`りす`,`すいか`,`つばめ`,`めだか`,`かめ`,`めんたいこ`,`こま`,`まんとひひ`,`ひらがな`,`なっとう`,`うさぎ`,`ぎぞく`,`くり`,`りけい`,`いど`,`どれっしんぐ`,`ぐみ`];
 
-let previousWord;
+let previousWord = StartWord[Math.floor(Math.random() * StartWord.length)];
 
 let keepWord = [];
 
@@ -13,8 +13,6 @@ console.log("Listening on http://localhost:8000");
 serve(async (req) => {
 
   const pathname = new URL(req.url).pathname;
-
-  previousWord = StartWord[Math.floor(Math.random() * StartWord.length)];
 
   if (req.method === "GET" && pathname === "/shiritori") {
 
